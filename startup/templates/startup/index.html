@@ -1,0 +1,155 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Startups</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <style>
+            body{
+                background-color:white;
+                overflow-x: hidden;
+                margin: 0;
+                color: white;
+            }
+            .container{
+                 /* display: grid;
+                grid-template-columns: auto auto auto; */
+                padding-top: 50px;
+                width: 100% !important;
+                gap: 80px;
+                height: auto;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                padding-right: 100px;
+            }
+            .startup{
+                background-color: rgb(19, 137, 213);
+                padding: 30px;
+                border-radius: 30px; 
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+                transition: 0.3s;
+                font-family: 'Montserrat';
+                text-align: center;
+                font-weight: bold;
+                width: 24% !important;
+                word-wrap: break-word;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+            }
+            .startup:hover {
+            box-shadow: 0 12px 24px 0 rgba(0,0,0,0.6);
+            transform: translate(0, -7px);
+            }
+            a{
+                text-decoration: none;
+                color: white;
+            }
+            .logos{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                font-size: 30px;
+            }
+            .image{
+                display: flex;
+                justify-content: center  !important;
+                max-width: 400px !important;
+                max-height: 400px !important;
+                align-items: center;
+                padding-left: 20px;
+            }
+            section {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                text-align: center;
+            }
+            section img{
+                position:absolute;
+                top: 0;
+                left: 0;
+                right:0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            #text {
+                position: relative;
+                z-index: 1;
+                font-size: 100px;
+                color:white;
+                font-family: 'Montserrat';
+                font-size: 150px;
+            }
+            /* .site-title {
+                font-size: clamp(4rem, 10vw + 0.5rem, 9rem);
+                font-weight: 900;
+                text-align: center;
+                font-family: 'Montserrat';
+                position: fixed;
+            }
+            .site-header{
+                background-image: url("https://images.unsplash.com/photo-1608841828390-a4eb54fb1987?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1239&q=80");
+                background-position: bottom;
+                background-size: cover;
+                padding: 5rem;
+                min-height: 70vh;
+                position: relative;
+            } */
+        </style>
+    </head>
+    <body>
+        <section class="site-header">
+            <img id="bg" src="https://images.unsplash.com/photo-1608841828390-a4eb54fb1987?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1239&q=80">
+            <h1 class="site-title" id="text">JOIN OUR COMMUNITY</h1>
+        </section>
+        <br><br><br><br>
+        <script type="text/javascript">
+            let bg = document.getElementById("bg");
+            let text = document.getElementById("text");
+            window.addEventListener('scroll', function(){
+                var value = window.scrollY;
+
+                bg.style.top = value * 0.6 + 'px';
+                text.style.top = value * 1 +'px';
+            })
+        </script>
+<div class="container">
+    {% for startup in startups %}
+    <div id="startup" class="startup">
+                <div class="image"><img src="{{startup.image}}" style="max-width: 400px; max-height: 400px;" height="90%" width="80%"></div>
+                <p style="font-size: 40px;">
+                    {{startup.name}}
+                </p>
+                <div id="description" style="font-size: 20px;">{{startup.description | safe}}</div>
+                <br>
+                <div class="logos">
+                <p><a href="{{startup.linkedin}}" >
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a></p>
+                <p><a href="{{startup.email}}">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </a></p>
+                <p style="font-family: 'Montserrat';"><i class="fa fa-phone" aria-hidden="true">  {{startup.contact}}</i></p>
+                </div>
+                
+            <!-- </div>
+        </div> -->
+    </div>
+    {% endfor %}
+</div>
+<br><br><br><br>
+</body>
+</html>
